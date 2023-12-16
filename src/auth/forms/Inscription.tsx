@@ -14,13 +14,13 @@ import { useUserContext } from "@/context/AuthContext";
 
 function Inscription() {
   const { toast } = useToast();
-  const { checkAuthUser, isLoading } = useUserContext();
+  const { checkAuthUser } = useUserContext();
   const navigate = useNavigate();
   // const isLoading = false;
 
   const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
 
-  const { mutateAsync: signInAccount, isPending: isSigningIn } = useSignInAccount();
+  const { mutateAsync: signInAccount } = useSignInAccount();
 
   // Définition du formulaire avec les options
   const form = useForm<z.infer<typeof inscriptionValidation>>({

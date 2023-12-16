@@ -5,6 +5,13 @@
   "hints": {
     "typescript-config/is-valid": "off",
     "compat-api/css": "off",
-    "axe/text-alternatives": "off"
+    "axe/text-alternatives": "off",
+    "no-inline-styles": "off",
+    "axe/structure": [
+      "default",
+      {
+        "list": "off"
+      }
+    ]
   }
 }
