@@ -91,7 +91,7 @@ export async function signInAccount(user: { email: string; password: string; }) 
 
   
   // ============================== GET USER
-  export async function getCurrentUser() {
+export async function getCurrentUser() {
     try {
       const currentAccount = await getAccount();
       console.log("Current Account in getCurrentUser:", currentAccount);
@@ -112,7 +112,7 @@ export async function signInAccount(user: { email: string; password: string; }) 
       console.log("Error in getCurrentUser:", error);
       return null;
     }
-  }
+}
 
 
 export async function signOutAccount() {

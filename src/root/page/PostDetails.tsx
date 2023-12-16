@@ -1,9 +1,9 @@
+import Loader from "@/components/shared/Loader";
 import PostStats from "@/components/shared/PostStats";
 import { Button } from "@/components/ui/button";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetPostById } from "@/lib/react-query/queryAndMutations";
 import { multiFormatDateString } from "@/lib/utils";
-import { Loader } from "lucide-react";
 import { Link, useParams } from "react-router-dom"
 
 function PostDetails() {
