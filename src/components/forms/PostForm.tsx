@@ -39,12 +39,12 @@ function PostForm({ post, action }: PostFormProps) {
        
       async function onSubmit(values: z.infer<typeof PostValidation>) {
         if (post && action === 'Update') {
-          const updatedPost = await updatePost({
-            ...values,
-            postId: post.$id,
-            imageId: post.imageId,
-            imageUrl: post.imageUrl,
-          });
+          // const updatedPost = await updatePost({
+          //   ...values,
+          //   postId: post.$id,
+          //   imageId: post.imageId,
+          //   imageUrl: post.imageUrl,
+          // });
 
           if (!updatePost) {
             toast({ title: 'Pleasee try again' });

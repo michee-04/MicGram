@@ -11,7 +11,7 @@ function LeftSlideBar() {
   const { mutate: signOut,  isSuccess } = useSignOutAccount();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { user, setUser, setIsAuthenticated, isLoading } = useUserContext();
+  const { user, setUser, setIsAuthenticated } = useUserContext();
 
   const handleSignOut = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -27,12 +27,6 @@ function LeftSlideBar() {
     if (isSuccess) navigate(0);
   }, [isSuccess ])
 
-  
-  const deconnexion = () => {
-    localStorage.removeItem("cookieFallback");
-    setIsAuthenticated(false);
-    window.location.replace("/connexion")
-}
   return (
     <nav className="leftsidebar">
       <div className="flex flex-col gap-11">

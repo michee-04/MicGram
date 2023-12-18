@@ -1,5 +1,4 @@
 import PostForm from "@/components/forms/PostForm"
-import { create } from "domain"
 
 function CreatePost() {
   return (

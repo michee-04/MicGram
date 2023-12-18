@@ -7,17 +7,12 @@ import { useUserContext } from "@/context/AuthContext";
 function TopBar() {
   const { mutate: signOut,  isSuccess } = useSignOutAccount();
   const navigate = useNavigate();
-  const { user, setIsAuthenticated } = useUserContext();
+  const { user } = useUserContext();
 
   useEffect(() => {
     if (isSuccess) navigate(0);
   }, [isSuccess ])
 
-  const deconnexion = () => {
-    localStorage.removeItem("user");
-    setIsAuthenticated(false);
-    window.location.replace("/connexion")
-}
   
   return (
     <section className="topbar">
