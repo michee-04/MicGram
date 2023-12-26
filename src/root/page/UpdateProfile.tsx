@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-const UpdateProfile = () => {
+function UpdateProfile (){
   const { toast } = useToast();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -31,8 +31,7 @@ const UpdateProfile = () => {
 
   // Queries
   const { data: currentUser } = useGetUserById(id || "");
-  const { mutateAsync: updateUser, isLoading: isLoadingUpdate } =
-    useUpdateUser();
+  const { mutateAsync: updateUser, isLoading: isLoadingUpdate } = useUpdateUser();
 
   if (!currentUser)
     return (

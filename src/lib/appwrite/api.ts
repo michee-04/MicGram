@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
-import { IUpdatePost, INewPost, INewUser, IUpdateUser, IAddComment } from "@/types";
+import { IUpdatePost, INewPost, INewUser, IUpdateUser } from "@/types";
 
 // ============================================================
 // AUTH
@@ -699,7 +699,7 @@ export const addComment = async (userId: string, postId: string, contenu: string
     throw error;
   }
 };
-*/
+
 export async function createComment(comment: IAddComment) {
   try {
     const newComment = await databases.createDocument(
@@ -721,3 +721,4 @@ export async function createComment(comment: IAddComment) {
     console.log(error);
   }
 }
+*/

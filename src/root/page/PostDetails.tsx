@@ -8,7 +8,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 
 function PostDetails() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id = '' } = useParams();
   const { data: post, isPending } = useGetPostById(id || ''); // Utilisez une chaîne vide comme valeur par défaut si id est undefined
   const { user } = useUserContext();
   const { mutate: deletePost } = useDeletePost();
