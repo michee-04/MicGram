@@ -1,5 +1,5 @@
-import { useQuery,useMutation,useQueryClient, useInfiniteQuery} from "@tanstack/react-query";
-import { createPost, createUserAccount, deletePost, deleteSavedPost, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getUserById, getUsers, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost, updateUser } from "../appwrite/api";
+import { useQuery,useMutation,useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
+import {  createPost, createUserAccount, deletePost, deleteSavedPost, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getUserById, getUsers, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost, updateUser } from "../appwrite/api";
 import { INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
 
@@ -68,22 +68,22 @@ import { QUERY_KEYS } from "./queryKeys";
 
   export const useSavePost = () => {
     const queryClient = useQueryClient();
-
     return useMutation({
-      mutationFn: ({ postId, userId } : { postId: string; userId: string }) => savePost(postId, userId),
+      mutationFn: ({ userId, postId }: { userId: string; postId: string }) =>
+        savePost(userId, postId),
       onSuccess: () => {
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.GET_RECENT_POSTS]
-        })
+          queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+        });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.GET_POSTS]
-        })
+          queryKey: [QUERY_KEYS.GET_POSTS],
+        });
         queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.GET_CURRENT_USER]
-        })
-      }
-    })
-  }
+          queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+        });
+      },
+    });
+  };
 
   export const useDeleteSavedPost = () => {
     const queryClient = useQueryClient();
@@ -164,9 +164,7 @@ import { QUERY_KEYS } from "./queryKeys";
       queryFn: () => searchPosts(searchTerm),
       enabled: !!searchTerm
     })
-  }
-
-  
+  }  
 
 export const useGetUsers = (limit?: number) => {
   return useQuery({
@@ -197,3 +195,111 @@ export const useUpdateUser = () => {
     },
   });
 };
+
+/*
+
+export const useAddComment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (comment: IAddComment) => addComment(comment.postId, comment.userId, comment.contenu),
+    onSuccess: (_, comment) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_COMMENTS, comment.postId],
+      });
+      // Vous pouvez également invalider d'autres requêtes selon vos besoins
+    },
+  });
+};
+
+
+
+export const useComment = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (comment: IAddComment) => {
+      try {
+        console.log('Mutation function called with comment:', comment);
+
+        const result = await commentPost(comment);
+        return result;
+      } catch (error) {
+        console.error('Error in useComment mutation:', error);
+        throw error; // Rethrow the error to ensure it's captured by the mutation
+      }
+    },
+    onSuccess: (data, variables) => {
+      console.log('Mutation successful. Invalidating queries:', data);
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_COMMENTS, variables.postId],
+      });
+    },
+    onError: (error) => {
+      console.error('Mutation error:', error);
+    },
+  });
+};
+
+export const useCommentMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (comment: IAddComment) => {
+      try {
+        const result = await addComment(comment.userId, comment.postId, comment.contenu);
+        return result;
+      } catch (error) {
+        console.error('Error in useComment mutation:', error);
+        throw error;
+      }
+    },
+    onSuccess: (data, variables) => {
+      console.log('Mutation successful. Invalidating queries:', data);
+      // Correction ici : Utilisez un tableau de filtres pour l'invalidation des requêtes
+      queryClient.invalidateQueries(['GET_COMMENTS', { postId: variables.postId }] as InvalidateQueryFilters);
+    },
+    onError: (error) => {
+      console.error('Mutation error:', error);
+    },
+  });
+};
+
+...
+
+export const useCommentMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (comment: IAddComment) => {
+      try {
+        const result = await addComment(comment.userId, comment.postId, comment.contenu);
+        return result;
+      } catch (error) {
+        console.error('Error in useComment mutation:', error);
+        throw error;
+      }
+    },
+    onSuccess: (data, variables) => {
+      console.log('Mutation successful. Invalidating queries:', data);
+      // Correction ici : Utilisez un tableau de filtres pour l'invalidation des requêtes
+      queryClient.invalidateQueries(['GET_COMMENTS', { postId: variables.postId }] as InvalidateQueryFilters);
+    },
+    onError: (error) => {
+      console.error('Mutation error:', error);
+    },
+  });
+};
+
+export const useCreateComment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (comment: IAddComment) => createComment(comment),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_COMMENTS],
+      });
+    },
+  });
+};
+*/

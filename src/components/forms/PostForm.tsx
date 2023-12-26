@@ -13,6 +13,7 @@ import { useUserContext } from "@/context/AuthContext"
 import { useToast } from "../ui/use-toast"
 import { useNavigate } from "react-router-dom"
 import { useCreatePost, useUpdatePost } from "@/lib/react-query/queryAndMutations"
+import Loader from "../shared/Loader"
 
 type PostFormProps = {
     post?: Models.Document;
@@ -39,14 +40,14 @@ function PostForm({ post, action }: PostFormProps) {
        
       async function onSubmit(values: z.infer<typeof PostValidation>) {
         if (post && action === 'Update') {
-          // const updatedPost = await updatePost({
-          //   ...values,
-          //   postId: post.$id,
-          //   imageId: post.imageId,
-          //   imageUrl: post.imageUrl,
-          // });
+          const updatedPost = await updatePost({
+            ...values,
+            postId: post.$id,
+            imageId: post.imageId,
+            imageUrl: post.imageUrl,
+          });
 
-          if (!updatePost) {
+          if (!updatedPost) {
             toast({ title: 'Pleasee try again' });
           }
 
@@ -144,7 +145,7 @@ function PostForm({ post, action }: PostFormProps) {
               type="submit" 
               className="shad-button_primary whitespace-nowrap"
             >
-              {isLoadingCreate || isLoadingUpdate && 'Loading...'}
+              {isLoadingCreate || isLoadingUpdate && <Loader />}
               {action} Post
             </Button>
         </div>

@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
-import { IUpdatePost, INewPost, INewUser, IUpdateUser } from "@/types";
+import { IUpdatePost, INewPost, INewUser, IUpdateUser, IAddComment } from "@/types";
 
 // ============================================================
 // AUTH
@@ -106,6 +106,7 @@ export async function getCurrentUser() {
 export async function signOutAccount() {
   try {
     const session = await account.deleteSession("current");
+    console.log("session",session);
 
     return session;
   } catch (error) {
@@ -136,9 +137,10 @@ export async function createPost(post: INewPost) {
     const tags = post.tags?.replace(/ /g, "").split(",") || [];
 
     // Create post
+    
     const newPost = await databases.createDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      appwriteConfig.postCollectionId,      
       ID.unique(),
       {
         creator: post.userId,
@@ -149,12 +151,15 @@ export async function createPost(post: INewPost) {
         tags: tags,
       }
     );
+    
 
     if (!newPost) {
       await deleteFile(uploadedFile.$id);
       throw Error;
     }
 
+    console.log("newPost", newPost);
+    
     return newPost;
   } catch (error) {
     console.log(error);
@@ -390,6 +395,7 @@ export async function savePost(userId: string, postId: string) {
     console.log(error);
   }
 }
+
 // ============================== DELETE SAVED POST
 export async function deleteSavedPost(savedRecordId: string) {
   try {
@@ -540,6 +546,177 @@ export async function updateUser(user: IUpdateUser) {
     }
 
     return updatedUser;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// ============================== ADD COMMENT
+// ...
+/*
+export async function addComment(postId: string, userId: string, contenu: string) {
+  try {
+    console.log("Trying to add comment:", { postId, userId, contenu });
+
+    const newComment = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentCollectionId,
+      ID.unique(),
+      {
+        commentPost: postId,
+        userId: userId,
+        contenu: contenu,
+        date: Date.now(),
+      }
+    );
+
+    if (!newComment) {
+      console.error("Failed to create comment:", newComment);
+      throw Error("Failed to create comment");
+    }
+
+    console.log("Comment added successfully:", newComment);
+
+    return newComment;
+  } catch (error) {
+    console.error("Error adding comment:", error);
+    throw error;
+  }
+}
+
+export async function commentPost(comment: IAddComment) {
+  try {
+
+    console.log('Trying to add comment:', comment);
+
+    const newComment1 = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentCollectionId,
+      ID.unique(),
+      {
+        userId: comment.userId,
+        postId: comment.postId,
+        contenu: comment.contenu,
+        date: Date.now(),
+      }
+    ); 
+
+    console.log(comment.postId);
+    
+    console.log('Comment added successfully:', newComment1);
+
+    return newComment1;
+  } catch (error) {
+    if (error instanceof AppwriteException) {
+      console.error('Appwrite error:', error);
+      // Gérer l'erreur Appwrite spécifiquement
+    } else {
+      console.error('Error adding comment:', error);
+      throw error; // Rethrow pour que l'erreur soit capturée par le gestionnaire de mutation
+    }
+  }
+}
+
+
+export const addComment = async (userId: string, postId: string, contenu: string) => {
+
+//   try {
+//     const newComment = await databases.createDocument(
+//       appwriteConfig.databaseId,
+//       appwriteConfig.commentCollectionId,
+//       ID.unique(), // Laissez null pour générer automatiquement un ID
+//       {
+//         userId,
+//         postId,
+//         contenu,
+//         date: Date.now(),
+//       }
+//     );
+
+//     console.log('Comment added successfully:', newComment);
+//     return newComment;
+//   } catch (error) {
+//     console.error('Error adding comment:', error);
+//     throw error; // Rethrow pour que l'erreur soit capturée par le gestionnaire de mutation
+//   }
+// };
+
+// ...
+
+export const addComment = async (userId: string, postId: string, contenu: string) => {
+  try {
+    // Récupérez l'utilisateur depuis la base de données
+    const user = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId
+    );
+
+    // Récupérez le post depuis la base de données
+    const post = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    );
+
+    // Créez un nouveau commentaire
+    const newComment = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentCollectionId,
+      ID.unique(),
+      {
+        userId,
+        postId,
+        contenu,
+        date: Date.now(),
+      }
+    );
+
+    // Mettez à jour la relation dans la table des utilisateurs (Many-to-One)
+    await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+      {
+        comments: [newComment.$id, ...(user.comments || [])],
+      }
+    );
+
+    // Mettez à jour la relation dans la table des posts (Many-to-One)
+    await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      {
+        comments: [newComment.$id, ...(post.comments || [])],
+      }
+    );
+
+    console.log('Comment added successfully:', newComment);
+    return newComment;
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    throw error;
+  }
+};
+*/
+export async function createComment(comment: IAddComment) {
+  try {
+    const newComment = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,      
+      ID.unique(),
+      {
+        creator: comment.userId,
+        contenu: comment.contenu,
+        date: Date.now(),
+      }
+    );
+  
+
+    console.log("newPost", newComment);
+    
+    return newComment;
   } catch (error) {
     console.log(error);
   }
