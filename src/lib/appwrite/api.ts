@@ -251,6 +251,7 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
   }
 }
 
+
 // ============================== GET POST BY ID
 export async function getPostById(postId?: string) {
   if (!postId) throw Error;

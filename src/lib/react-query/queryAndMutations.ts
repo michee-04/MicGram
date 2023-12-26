@@ -153,8 +153,9 @@ import { QUERY_KEYS } from "./queryKeys";
 
         const lastId = lastPage?.documents[lastPage?.documents.length - 1].$id;
 
-        return lastId;
-      }
+        return lastId ? parseInt(lastId) : null
+      },
+      initialPageParam: 1, 
     })
   }
 
