@@ -71,4 +71,8 @@ export type INavLink = {
   }
 */
 
-  
+export type IAddComment = {
+  userId: string;
+  postId: string;
+  contenu: string;
+}  

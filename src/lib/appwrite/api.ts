@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
-import { IUpdatePost, INewPost, INewUser, IUpdateUser } from "@/types";
+import { IUpdatePost, INewPost, INewUser, IUpdateUser, IAddComment } from "@/types";
 
 // ============================================================
 // AUTH
@@ -43,19 +43,19 @@ export async function saveUserToDB(user: {
   name: string;
   imageUrl: URL;
   username?: string;
-}) {
-  try {
-    const newUser = await databases.createDocument(
-      appwriteConfig.databaseId,
-      appwriteConfig.userCollectionId,
-      ID.unique(),
-      user
-    );
+  }) {
+    try {
+      const newUser = await databases.createDocument(
+        appwriteConfig.databaseId,
+        appwriteConfig.userCollectionId,
+        ID.unique(),
+        user
+      );
 
-    return newUser;
-  } catch (error) {
-    console.log(error);
-  }
+      return newUser;
+    } catch (error) {
+      console.log(error);
+    }
 }
 
 // ============================== SIGN IN
@@ -230,6 +230,7 @@ export async function searchPosts(searchTerm: string) {
 }
 
 export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
 
   if (pageParam) {
@@ -456,6 +457,7 @@ export async function getRecentPosts() {
 
 // ============================== GET USERS
 export async function getUsers(limit?: number) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queries: any[] = [Query.orderDesc("$createdAt")];
 
   if (limit) {
@@ -723,3 +725,28 @@ export async function createComment(comment: IAddComment) {
   }
 }
 */
+
+export async function createComment (post: IAddComment) {
+
+  try {
+    const newComment = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentCollectionId,      
+      ID.unique(),
+      {
+        creator: post.userId,
+        contenu: post.contenu,
+      }
+    );
+    if (!newComment) {
+      throw Error;
+    }
+
+    console.log("newPost", newComment);
+    
+    return newComment;
+  } catch (error) {
+    console.log(error);
+    
+  }
+}

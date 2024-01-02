@@ -156,7 +156,7 @@ function Inscription() {
               }
             </Button>
 
-            <p className="texxt-small-regular text-light-2 text6center mt-2">
+            <p className="text-small-regular text-light-2 text6center mt-2">
               Already have an account? 
               <Link to="/connexion" className="text-primary-500 text-small-semibold ml-1">
                 Log in
