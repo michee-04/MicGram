@@ -13,8 +13,8 @@ function AuthLayout() {
               <Outlet />
             </section>
 
-            <img src="/public//assets//images//side-img.svg"
-              alt="logo"
+            <img src="/assets//images//side-img.svg"
+              alt="side-img"
               className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat"
             />
           </>

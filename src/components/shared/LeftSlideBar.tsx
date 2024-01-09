@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
 import { Button } from '@/components/ui/button';
@@ -32,20 +33,16 @@ function LeftSlideBar() {
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
           <img
-            src="/public/assets/images/logo.png" 
+            src="/assets/images/logo.png" 
             alt="logo"
             width={170}
             height={36} 
           />
         </Link>
 
-        {/* <Button variant="ghost" className="shad-button_ghos" onClick={deconnexion}>
-          <img src="/public//assets/icons/logout.svg" />
-        </Button> */}
-
         <Link to={`/profile/${user.id}`} className="flex gap-3 items-center">
           <img 
-            src={user.imageUrl || "/public/assets/icons/profile-placeholder.svg"}
+            src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
             alt="profile" 
             className="h-14 w-14 rounded-full"
           />
@@ -95,7 +92,7 @@ function LeftSlideBar() {
       <Button variant="ghost"
         className="shad-button_ghost" onClick={(e) => handleSignOut(e)}
       >
-        <img src="/public/assets/icons/logout.svg"
+        <img src="/assets/icons/logout.svg"
         alt="logout"
         />
         <p className="small-medium lg:base-medium">Logout</p>

@@ -30,7 +30,7 @@ function PostCard({ post }: PostCardProps) {
             <div className="flex items-center gap-3">
                 <Link to={`/profile/${post.creator.$id}`}>
                     <img 
-                      src={post?.creator?.imageUrl || '/public/assets/icons/profile-placeholder.svg'}
+                      src={post?.creator?.imageUrl || '/assets/icons/profile-placeholder.svg'}
                       alt="creator" 
                       className="rounded-full w-12 lg:h-12"
                     />
@@ -58,7 +58,7 @@ function PostCard({ post }: PostCardProps) {
               className={`${user.id !== post.creator.$id} && "hidden"`}
             >
               <img 
-                src="/public/assets/icons/edit.svg" 
+                src="/assets/icons/edit.svg" 
                 alt="edit" 
                 width={20}
                 height={20}
@@ -79,7 +79,7 @@ function PostCard({ post }: PostCardProps) {
           </div>
 
           <img 
-            src={post.imageUrl || "/public/assets/icons/profile-placeholder.svg"}
+            src={post.imageUrl || "/assets/icons/profile-placeholder.svg"}
             className="post-card_img"
             alt="post image"
           />

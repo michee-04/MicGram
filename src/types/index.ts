@@ -57,20 +57,6 @@ export type INavLink = {
     password: string;
   };
 
-  /*
-  export type IAddComment = {
-    file: any;
-    userId: string;
-    postId: string;
-    contenu: string;
-  }
-  
-  export type IAddComment1 = {
-    userId: string;
-    contenu: string;
-  }
-*/
-
 export type IAddComment = {
   userId: string;
   postId: string;

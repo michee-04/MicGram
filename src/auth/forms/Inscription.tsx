@@ -75,7 +75,7 @@ function Inscription() {
 
         <div className="sm:w-420 flex-center flex-col">
           {/* Mon logo Micgram */}
-            <img src="/public/assets/images/logo.png" style={{
+            <img src="/assets/images/logo.png" style={{
               height: "150px"
             }} />
 

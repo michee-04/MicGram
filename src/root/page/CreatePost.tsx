@@ -6,7 +6,7 @@ function CreatePost() {
       <div className="common-container">
         <div className="max-w-5x1 flex-start gap-3 justify-start w-full">
           <img 
-            src="/public/assets/icons/add-post.svg" 
+            src="/assets/icons/add-post.svg" 
             width={36}
             height={36}
             alt="add" 

@@ -29,3 +29,7 @@ export const PostValidation = z.object({
     email: z.string().email(),
     bio: z.string(),
   });
+
+  export const commentValidation = z.object({
+    contenu: z.string(),
+  })

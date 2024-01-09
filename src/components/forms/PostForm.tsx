@@ -66,7 +66,7 @@ function PostForm({ post, action }: PostFormProps) {
         }
 
         navigate('/');
-      };
+      }
 
   return (
     <Form {...form}>
