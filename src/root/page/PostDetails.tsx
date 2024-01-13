@@ -1,3 +1,4 @@
+import CommentList from "@/components/shared/CommentList";
 import Loader from "@/components/shared/Loader";
 import PostStats from "@/components/shared/PostStats";
 import { Button } from "@/components/ui/button";
@@ -95,7 +96,7 @@ function PostDetails() {
 
             <hr className="border w-full border-dark-4/80" />
 
-            {/* <CommentList /> */}
+            <CommentList post={post} />
             
 
             <div className="w-full">

@@ -67,7 +67,7 @@ const toggleCommenting = () => {
 };
 
   return (
-    <div className="flex gap-3 mr-9">
+    <div className="flex gap-2 mr-9">
             {/* Image pour basculer l'état de commentaire */}
             <img
               src="/assets/icons/comment.svg"
@@ -87,8 +87,13 @@ const toggleCommenting = () => {
                   placeholder="Ajouter un commentaire"
                   className="shad-input w-full p-2 border border-gray-300 rounded"
                 />
-                <Button onClick={handleCommentPost} className="shad-button_primary">
-                  Envoyer
+                <Button onClick={handleCommentPost}>
+                  <img 
+                    src="/assets/icons/send.svg"
+                    alt="" 
+                    width={36}
+                    height={36}
+                  />
                 </Button>
               </>
             )}

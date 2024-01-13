@@ -16,13 +16,13 @@ const AllUsers = () => {
   }
 
   return (
-    <div className="common-container">
+    <div className="home-creators">
       <div className="user-container">
-        <h2 className="h3-bold md:h2-bold text-left w-full">All Users</h2>
+        <h2 className="h3-bold md:h2-bold text-left w-full">Top Creator</h2>
         {isLoading && !creators ? (
           <Loader />
         ) : (
-          <ul className="user-grid">
+          <ul className="user-grid-creator">
             {creators?.documents.map((creator: { $id: Key | null | undefined; }) => (
               <li key={creator?.$id} className="flex-1 min-w-[200px] w-full  ">
                 <UserCard user={creator} />

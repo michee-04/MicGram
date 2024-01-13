@@ -1,51 +1,48 @@
-import { useGetComment, useGetPostById } from "@/lib/react-query/queryAndMutations";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { multiFormatDateString } from "@/lib/utils";
+import { Models } from "appwrite";
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
 import { Link, useParams } from "react-router-dom";
 
+type PostCardProps = {
+  post: Models.Document;
+}
 
-function CommentList() {
+function CommentList({ post }: PostCardProps) {
+  console.log("post", post);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id = '' } = useParams();
-  const { data: post } = useGetPostById(id || ''); // Utilisez une chaîne vide comme valeur par défaut si id est undefined
-  const { data: comment } = useGetComment(id || ''); // Utilisez une chaîne vide comme valeur par défaut si id est undefined
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const { user } = useUserContext();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const { data: CommentPost } = useGetComment(); // Utilisez une chaîne vide comme valeur par défaut si id est undefined
 
-  
   return (
-    <div className="post_details-info">
-            <div className="flex-between w-full">
-              <Link to={`/profile/${post?.creator.$id}`} className="flex items-center gap-3">
-                <img 
-                  src={comment?.creator.imageUrl || '/assets/icons/profile-placeholder.svg'}
-                  alt="creator" 
-                  className="rounded-full w-8 h-8 lg:w-12 lg:h-12"
-                />
-                
-                <div className="flex flex-col">
-
-                  <p className="base-medium lg:body-bold text-light-1">
-                    {comment?.creator.name}
-                  </p>
-
-                  <div className="flex-center gap-2 text-light-3">
-                    <p className="subtle-semibold lg:small-regular">
-                      {multiFormatDateString(post?.$createdAt)}
-                    </p>
-                    <p className="subtle-semibold lg:small-regular">
-                      {post?.comment.contenu}
-                    </p>
-                  </div>
-
-                </div>
-              </Link>
-
+    <div>
+      {post?.comment.map((comment: { $id: Key | null | undefined; creator: { $id: any; imageUrl: any; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; contenu: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; $createdAt: string | undefined; }) => (
+        <div key={comment.$id} className="flex-between w-full mb-4">
+          <Link to={`/profile/${comment.creator.$id}`} className="flex items-center gap-3">
+            <img
+              src={comment.creator?.imageUrl || '/assets/icons/profile-placeholder.svg'}
+              alt="créateur"
+              className="rounded-full w-10 h-10 lg:w-10 lg:h-10"
+            />
+            <div className="flex flex-col">
+              <p className="base-medium lg:body-bold text-light-3">
+                {comment.creator.name}
+              </p>
             </div>
 
-          </div>
-  )
+          </Link>
+
+          <p className="text-light-1 ml-4 mr-4">{comment.contenu}</p>
+          
+            <div className="flex text-light-3">
+              <p className="subtle-semibold lg:small-regular flex">
+                {multiFormatDateString(comment.$createdAt)}
+              </p>
+            </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default CommentList

@@ -91,7 +91,7 @@ export async function getCurrentUser() {
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       [Query.equal("accountId", currentAccount.$id)]
-    );
+    );    
 
     if (!currentUser) throw Error;
 
@@ -589,6 +589,29 @@ export async function getComment(userId: string) {
       appwriteConfig.commentCollectionId,
       userId,
       // [Query.orderDesc("$createdAt"), Query.limit(20)]
+    );
+
+    if (!comment) throw Error;
+
+    return comment;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getC(limit?: number) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const queries: any[] = [Query.orderDesc("$createdAt")];
+
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+
+  try {
+    const comment = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
     );
 
     if (!comment) throw Error;
