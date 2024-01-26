@@ -2,7 +2,7 @@
 import { multiFormatDateString } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type PostCardProps = {
   post: Models.Document;
@@ -12,10 +12,9 @@ function CommentList({ post }: PostCardProps) {
   console.log("post", post);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { id = '' } = useParams();
 
   return (
-    <div>
+    <div className="comment-list">
       {post?.comment.map((comment: { $id: Key | null | undefined; creator: { $id: any; imageUrl: any; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }; contenu: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; $createdAt: string | undefined; }) => (
         <div key={comment.$id} className="flex-between w-full mb-4">
           <Link to={`/profile/${comment.creator.$id}`} className="flex items-center gap-3">

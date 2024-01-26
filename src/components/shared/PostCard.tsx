@@ -83,6 +83,8 @@ function PostCard({ post }: PostCardProps) {
             className="post-card_img"
             alt="post image"
           />
+          <p className="subtle-semibold lg:small-regular text-light-3 mb-2">{post.comment.length} Commentaires</p>
+
         </Link>
 
         <PostStats post={post} userId={user.id} />

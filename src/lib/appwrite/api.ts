@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, storage, avatars } from "./config";
-import { IUpdatePost, INewPost, INewUser, IUpdateUser, IAddComment } from "@/types";
+import { IUpdatePost, INewPost, INewUser, IUpdateUser, IAddComment, INewStory, IUpdateStory } from "@/types";
 
 // ============================================================
 // AUTH
@@ -599,6 +599,7 @@ export async function getComment(userId: string) {
   }
 }
 
+/*
 export async function getC(limit?: number) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const queries: any[] = [Query.orderDesc("$createdAt")];
@@ -617,6 +618,114 @@ export async function getC(limit?: number) {
     if (!comment) throw Error;
 
     return comment;
+  } catch (error) {
+    console.log(error);
+  }
+}
+*/
+
+
+// ============================== ADD STORY
+
+export async function createStory(story: INewStory) {
+  try {
+    console.log("story", story);
+    
+    // Upload file to appwrite storage
+    const uploadedFile = await uploadFile(story.file[0]);
+
+    if (!uploadedFile) throw Error;
+
+    // Get file url
+    const fileUrl = getFilePreview(uploadedFile.$id);
+    if (!fileUrl) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    // Create post
+    
+    const newStory = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.storyCollectionId,      
+      ID.unique(),
+      {
+        creator: story.userId,
+        contenu: story.contenu,
+        mediaUrl: fileUrl,
+        mediaId: uploadedFile.$id,
+      }
+    );
+    
+
+    if (!newStory) {
+      await deleteFile(uploadedFile.$id);
+      throw Error;
+    }
+
+    console.log("", newStory);
+    
+    return newStory;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function updateStory(story: IUpdateStory) {
+  const hasFileToUpdate = story.file.length > 0;
+
+  try {
+    let media = {
+      mediaUrl: story.mediaUrl,
+      mediaId: story.mediaId,
+    };
+
+    if (hasFileToUpdate) {
+      // Upload new file to appwrite storage
+      const uploadedFile = await uploadFile(story.file[0]);
+      if (!uploadedFile) throw Error;
+
+      // Get new file url
+      const fileUrl = getFilePreview(uploadedFile.$id);
+      if (!fileUrl) {
+        await deleteFile(uploadedFile.$id);
+        throw Error;
+      }
+
+      media = { ...media, mediaUrl: fileUrl, mediaId: uploadedFile.$id };
+    }
+
+    // Convert tags into array
+
+    //  Update post
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      story.storyId,
+      {
+        contenu: story.contenu,
+        mediaUrl: media.mediaUrl,
+        mediaId: media.mediaId,
+      }
+    );
+
+    // Failed to update
+    if (!updatedPost) {
+      // Delete new file that has been recently uploaded
+      if (hasFileToUpdate) {
+        await deleteFile(media.mediaId);
+      }
+
+      // If no new file uploaded, just throw error
+      throw Error;
+    }
+
+    // Safely delete old file after successful update
+    if (hasFileToUpdate) {
+      await deleteFile(story.mediaId);
+    }
+
+    return updatedPost;
   } catch (error) {
     console.log(error);
   }

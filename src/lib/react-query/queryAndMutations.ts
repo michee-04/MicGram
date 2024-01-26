@@ -1,6 +1,6 @@
 import { useQuery,useMutation,useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
-import {  createComment, createPost, createUserAccount, deletePost, deleteSavedPost, getComment, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getUserById, getUsers, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost, updateUser } from "../appwrite/api";
-import { IAddComment, INewPost, INewUser, IUpdatePost, IUpdateUser } from "@/types";
+import {  createComment, createPost, createStory, createUserAccount, deletePost, deleteSavedPost, getComment, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getUserById, getUsers, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost, updateUser } from "../appwrite/api";
+import { IAddComment, INewPost, INewStory, INewUser, IUpdatePost, IUpdateUser } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
 
  export const useCreateUserAccount = () => {
@@ -31,6 +31,18 @@ import { QUERY_KEYS } from "./queryKeys";
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+        });
+      },
+    });
+  };
+  
+ export const useCreateStory = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (story: INewStory) => createStory(story),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.GET_RECENT_STORY],
         });
       },
     });

@@ -94,9 +94,8 @@ function PostDetails() {
               </ul>
             </div>
 
-            <hr className="border w-full border-dark-4/80" />
-
             <CommentList post={post} />
+            <hr className="border w-full border-dark-4/80" />
             
 
             <div className="w-full">

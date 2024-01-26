@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-var-requires, no-undef
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -33,6 +34,8 @@ module.exports = {
         'light-2': '#EFEFEF',
         'light-3': '#7878A3',
         'light-4': '#5C5C7B',
+        'violet': '#9B59B6',
+        'bleu-vert': '#1F1D57',
       },
       screens: {
         'xs': '480px',
@@ -62,5 +65,6 @@ module.exports = {
       },
     },
   },
+  // eslint-disable-next-line no-undef
   plugins: [require('tailwindcss-animate')],
 };

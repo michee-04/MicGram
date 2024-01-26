@@ -20,6 +20,7 @@ export enum QUERY_KEYS {
   GET_POST_BY_ID = "GET_POST_BY_ID",
 
   // COMMENT KEYS
-  GET_COMMENTS = "getComments"
+  GET_COMMENTS = "getComments",
+  GET_RECENT_STORY = "getRecentStory"
 }
   

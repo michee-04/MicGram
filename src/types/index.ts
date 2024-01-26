@@ -61,4 +61,18 @@ export type IAddComment = {
   userId: string;
   postId: string;
   contenu: string;
-}  
+}
+
+export type INewStory = {
+  userId: string;
+  contenu: string;
+  file: File[];
+};
+
+export type IUpdateStory = {
+  storyId: string;
+  contenu: string;
+  mediaId: string;
+  mediaUrl: URL;
+  file: File[];
+};
