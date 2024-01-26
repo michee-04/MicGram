@@ -2,7 +2,7 @@ import Loader from "@/components/shared/Loader";
 import UserCard from "@/components/shared/userCard";
 import { useToast } from "@/components/ui/use-toast";
 import { useGetUsers } from "@/lib/react-query/queryAndMutations";
-import { Key } from "react";
+import { Models } from "appwrite";
 
 const AllUsers = () => {
   const { toast } = useToast();
@@ -23,7 +23,7 @@ const AllUsers = () => {
           <Loader />
         ) : (
           <ul className="user-grid">
-            {creators?.documents.map((creator: { $id: Key | null | undefined; }) => (
+            {creators?.documents.map((creator: Models.Document) => (
               <li key={creator?.$id} className="flex-1 min-w-[200px] w-full  ">
                 <UserCard user={creator} />
               </li>

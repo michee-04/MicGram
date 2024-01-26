@@ -94,7 +94,9 @@ function PostDetails() {
               </ul>
             </div>
 
-            <CommentList post={post} />
+            {post && (
+              <CommentList post={post} />
+            )}
             <hr className="border w-full border-dark-4/80" />
             
 

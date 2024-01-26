@@ -12,6 +12,7 @@
       {
         "list": "off"
       }
-    ]
+    ],
+    "typescript-config/consistent-casing": "off"
   }
 }
