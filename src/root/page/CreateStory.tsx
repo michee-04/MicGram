@@ -1,11 +1,14 @@
 /** @format */
 
+import StoryList from "@/components/shared/StoryList"
 import { Button } from "@/components/ui/button"
+import { useUserContext } from "@/context/AuthContext"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
 function CreateStory() {
   const [showStory, setShowStory] = useState(false)
+  const { user } = useUserContext()
 
   const handleCreateStory = () => {
     // Mettez à jour l'état pour afficher la page Story et rendre Create Story opaque
@@ -18,35 +21,34 @@ function CreateStory() {
   }
 
   return (
-    <div>
-      <Link
-        to={`/story/`}
-        className='user-card-story'
-        onClick={handleCreateStory}>
-        <img
-          src={"/assets/icons/plus.svg"}
-          alt='creator'
-          className={`rounded-full w-5 h-5 ${
-            showStory ? "bg-transparent" : "bg-violet"
-          }`}
-        />
+    <div className='flex items-center space-x-2 gap-5'>
+      <div className='flex flex-col items-center mr-10'>
+        <Link to={`/story/`} onClick={handleCreateStory}>
+          <img
+            src={
+              user.imageUrl || "/public/assets/icons/profile-placeholder.svg"
+            }
+            alt='creator'
+            className='rounded-full w-12 h-12 lg:h-12 lg:w-12 border border-primary-600'
+          />
+        </Link>
+        {/* <PlusIcon className='text-white ml-10 ' /> */}
+        <p className='px-5 small-regular'>Story</p>
 
-        <Button type='button' size='sm' className='shad-button_primary px-5'>
-          Create Story
-        </Button>
-      </Link>
-
-      {showStory && (
-        <div className='overlay'>
-          {/* Page Story */}
-          <div className='story-container'>
-            {/* Contenu de la page Story */}
-            <Button type='button' onClick={handleStoryClose}>
-              Close Story
-            </Button>
+        {showStory && (
+          <div className='overlay'>
+            {/* Page Story */}
+            <div className='story-container'>
+              {/* Contenu de la page Story */}
+              <Button type='button' onClick={handleStoryClose}>
+                Close Story
+              </Button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
+      <StoryList />
     </div>
   )
 }

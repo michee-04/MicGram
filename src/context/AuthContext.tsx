@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { IUser } from "@/types";
 import { getCurrentUser } from "@/lib/appwrite/api";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const INITIAL_USER = {
   id: "",
   name: "",
@@ -54,7 +55,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
         setIsAuthenticated(true);
 
-        console.log("User set", user);
+        // console.log("User set", user);
         
 
         return true;
@@ -80,6 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     checkAuthUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = {
@@ -94,4 +96,5 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUserContext = () => useContext(AuthContext);

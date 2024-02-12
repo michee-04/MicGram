@@ -18,7 +18,7 @@ import { Textarea } from "../ui/textarea"
 import { useUserContext } from "@/context/AuthContext"
 import {
   useCreateStory,
-  useUpdatePost,
+  useUpdateStory,
 } from "@/lib/react-query/queryAndMutations"
 import { StoryValidation } from "@/lib/validation"
 import { Models } from "appwrite"
@@ -35,7 +35,7 @@ function StoryForm({ post, action }: PostFormProps) {
   const { mutateAsync: createStory, isPending: isLoadingCreate } =
     useCreateStory()
   const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
-    useUpdatePost()
+    useUpdateStory()
 
   const { user } = useUserContext()
   const { toast } = useToast()
@@ -53,10 +53,10 @@ function StoryForm({ post, action }: PostFormProps) {
     if (post && action === "Update") {
       const updatedPost = await updatePost({
         ...values,
-        postId: post.$id,
-        imageId: post.imageId,
-        imageUrl: post.imageUrl,
-        caption: "",
+        storyId: post.$id,
+        mediaId: post.imageId,
+        mediaUrl: post.imageUrl,
+        contenu: "",
       })
 
       if (!updatedPost) {

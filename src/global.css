@@ -114,6 +114,9 @@
   .common-containerC {
     @apply flex flex-col flex-1 items-center gap-3 overflow-scroll py-14 px-2 md:px-8 lg:p-14 custom-scrollbar;
   }
+  .opacity {
+    @apply fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex justify-center items-center;
+  }
 
   /* All Users */
   .user-container {
@@ -122,6 +125,9 @@
 
   .user-grid {
     @apply w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 max-w-5xl;
+  }
+  .user-story {
+    @apply w-full grid-cols-3 grid gap-1 xl:grid-cols-4;
   }
   .user-grid-creator {
     @apply w-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-3 max-w-3xl;
@@ -192,6 +198,15 @@
     @apply flex-center gap-3 py-4 w-48 bg-dark-2  transition flex-1 xl:flex-initial;
   }
 
+  .all-chat-container {
+    @apply flex flex-col flex-1 w-80 border-r border-gray-800 gap-10 overflow-scroll py-10 md:p-14 custom-scrollbar;
+    /* @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-2 md:p-14 custom-scrollbar; */
+  }
+
+  .all-chat-user {
+    @apply flex items-center space-x-3 px-4 py-2 hover:bg-gray-700 overflow-y-auto;
+  }
+
   /* Saved */
   .saved-container {
     @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar;
@@ -257,7 +272,8 @@
   }
 
   .user-card-story {
-    @apply flex-center flex-col gap-4 border border-violet rounded-[20px] px-5 py-8;
+    @apply flex items-center space-x-4 border border-primary-600  h-24 rounded-full p-4 overflow-hidden;
+    /* @apply grid grid-cols-3 gap-3 p-3 w-24 h-24 bg-[#47f5982f] rounded-full border-4 border-blue-500 overflow-hidden; */
   }
 }
 

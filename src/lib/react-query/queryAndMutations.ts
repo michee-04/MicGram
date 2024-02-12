@@ -1,6 +1,6 @@
 import { useQuery,useMutation,useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
-import {  createComment, createPost, createStory, createUserAccount, deletePost, deleteSavedPost, getComment, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getUserById, getUsers, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost, updateUser } from "../appwrite/api";
-import { IAddComment, INewPost, INewStory, INewUser, IUpdatePost, IUpdateUser } from "@/types";
+import {  createComment, createPost, createStory, createUserAccount, deletePost, deleteSavedPost, getComment, getCurrentUser, getInfinitePosts, getPostById, getRecentPosts, getStory, getStoryById, getUserById, getUsers, likePost, savePost, searchPosts, signInAccount, signOutAccount, updatePost, updateStory, updateUser } from "../appwrite/api";
+import { IAddComment, INewPost, INewStory, INewUser, IUpdatePost, IUpdateStory, IUpdateUser } from "@/types";
 import { QUERY_KEYS } from "./queryKeys";
 
  export const useCreateUserAccount = () => {
@@ -31,18 +31,6 @@ import { QUERY_KEYS } from "./queryKeys";
       onSuccess: () => {
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-        });
-      },
-    });
-  };
-  
- export const useCreateStory = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-      mutationFn: (story: INewStory) => createStory(story),
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [QUERY_KEYS.GET_RECENT_STORY],
         });
       },
     });
@@ -227,3 +215,42 @@ import { QUERY_KEYS } from "./queryKeys";
       enabled: !!userId,
     });
   };
+
+  export const useCreateStory = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (story: INewStory) => createStory(story),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.GET_RECENT_STORY],
+        });
+      },
+    });
+  };
+
+  export const useGetStory = (limit?: number) => {
+    return useQuery({
+      queryKey: [QUERY_KEYS.GET_STORY],
+      queryFn: () => getStory(limit),
+    });
+  };
+
+  export const useUpdateStory = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+      mutationFn: (story: IUpdateStory) => updateStory(story),
+      onSuccess: (data) => {
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+        });
+      },
+    });
+  };
+
+  export const useGetStoryById = (storyId: string) => {
+    return useQuery({
+      queryKey: [QUERY_KEYS.GET_STORY_BY_ID, storyId],
+      queryFn: () => getStoryById(storyId),
+      enabled: !!storyId
+    })
+  }  

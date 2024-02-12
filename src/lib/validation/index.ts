@@ -32,10 +32,16 @@ export const PostValidation = z.object({
 
   export const commentValidation = z.object({
     contenu: z.string(),
-  })
+  });
 
   
 export const StoryValidation = z.object({
+  contenu: z.string().min(5).max(2200),
+  file: z.custom<File[]>(),
+});
+
+
+export const MessageValidation = z.object({
   contenu: z.string().min(5).max(2200),
   file: z.custom<File[]>(),
 })

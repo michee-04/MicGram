@@ -1,10 +1,10 @@
 import Loader from "@/components/shared/Loader";
-import UserCard from "@/components/shared/userCard";
+import UserChat from "@/components/shared/UserChat";
 import { useToast } from "@/components/ui/use-toast";
 import { useGetUsers } from "@/lib/react-query/queryAndMutations";
 import { Models } from "appwrite";
 
-const AllUsers = () => {
+function Chat() {
   const { toast } = useToast();
 
   const { data: creators, isLoading, isError: isErrorCreators } = useGetUsers();
@@ -16,25 +16,33 @@ const AllUsers = () => {
     
     return;
   }
-
   return (
-    <div className="common-container">
-      <div className="user-container">
-        <h2 className="h3-bold md:h2-bold text-left w-full">All Users</h2>
-        {isLoading && !creators ? (
+    <div className="all-chat-container">
+      <div className="flex gap-2 w-full max-w-5xl">
+        <img 
+          src="/public/assets/icons/chat.svg" 
+          width={36}
+          height={36}
+          alt="chat" 
+          className="invert-white"
+        />
+        <h2 className="h3-bold md:h2-bold text-left w-full">All Chats</h2>
+      </div>
+      <div className="flex-1 flex">
+      {isLoading && !creators ? (
           <Loader />
         ) : (
-          <ul className="user-grid">
+          <ul className="">
             {creators?.documents.map((creator: Models.Document) => (
               <li key={creator?.$id} className="flex-1 min-w-[200px] w-full  ">
-                <UserCard user={creator} />
+                <UserChat user={creator} />
               </li>
             ))}
           </ul>
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AllUsers;
+export default Chat

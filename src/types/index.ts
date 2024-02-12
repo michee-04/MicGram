@@ -76,3 +76,14 @@ export type IUpdateStory = {
   mediaUrl: URL;
   file: File[];
 };
+
+export type INewChat = {
+  senderId: string;
+  receiverId: string;
+  message: string;
+};
+
+export type INewMessage = {
+  chatId: string;
+  message: string;
+}

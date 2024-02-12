@@ -4,7 +4,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useGetUsers } from "@/lib/react-query/queryAndMutations";
 import { Models } from "appwrite";
 
-const AllUsers = () => {
+const TopCreator = () => {
   const { toast } = useToast();
 
   const { data: creators, isLoading, isError: isErrorCreators } = useGetUsers();
@@ -35,4 +35,4 @@ const AllUsers = () => {
   );
 };
 
-export default AllUsers;
+export default TopCreator;

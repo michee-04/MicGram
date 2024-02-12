@@ -20,6 +20,7 @@ import {
 } from "./root/page"
 import CreateStory from "./root/page/CreateStory"
 import StoryForm from "./components/forms/StoryForm"
+import Chat from "./root/page/AllChats"
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
           <Route path='/saved' element={<Saved />} />
           <Route path='/all-users' element={<AllUsers />} />
           <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/chats' element={<Chat />} />
           <Route path='/update-post/:id' element={<EditPost />} />
           <Route path='/posts/:id' element={<PostDetails />} />
           <Route path='/profile/:id/*' element={<Profile />} />

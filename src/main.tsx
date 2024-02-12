@@ -1,9 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import QueryProvider from "./lib/react-query/QueryProvider";
-import { AuthProvider } from "./context/AuthContext";
+/** @format */
+
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { BrowserRouter } from "react-router-dom"
+import App from "./App"
+import { AuthProvider } from "./context/AuthContext"
+import QueryProvider from "./lib/react-query/QueryProvider"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -15,4 +17,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       </QueryProvider>
     </BrowserRouter>
   </React.StrictMode>
-);
+)
