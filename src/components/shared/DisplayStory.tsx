@@ -12,6 +12,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 import * as React from "react"
+// import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog"
 
 interface Story {
   mediaUrl: string
@@ -78,6 +79,28 @@ export function DisplayStory({
           <p>{stories[selectedStoryIndex].contenu}</p>
         )}
       </div>
+
+      {/* <Dialog>
+              <DialogTrigger className=''>
+                
+              </DialogTrigger>
+              <DialogContent className="max-w-[900px] w-[90%] h-[90%] flex flex-col items-center mr-10">
+              {stories?.map((story, index) => (
+                <div key={index}>
+                <div>
+                  <div className='flex aspect-square items-center justify-center p-6'>
+                    <img
+                      src={story.mediaUrl}
+                      alt={`story-${index + 1}`}
+                      className='w-full h-full cursor-pointer'
+                      onClick={() => onSelectStory(story.storyId)} // Utilisez le storyId
+                    />
+                  </div>
+                </div>
+                </div>
+                ))}
+              </DialogContent>
+            </Dialog> */}
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { useSignOutAccount } from "@/lib/react-query/queryAndMutations";
 import { INITIAL_USER, useUserContext } from "@/context/AuthContext";
 import { sidebarLinks } from "@/constants";
 import { INavLink } from "@/types";
+import { ModeToggle } from "../ui/mode-toggle";
 
 
 function LeftSlideBar() {
@@ -39,6 +40,7 @@ function LeftSlideBar() {
             height={36} 
           />
         </Link>
+        <ModeToggle />
 
         <Link to={`/profile/${user.id}`} className="flex gap-3 items-center">
           <img 

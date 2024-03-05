@@ -132,6 +132,7 @@ function StoryForm({ post, action }: PostFormProps) {
               {action} Story
             </Button>
           </div>
+
         </form>
       </Form>
     </div>
