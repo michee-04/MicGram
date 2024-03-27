@@ -79,7 +79,7 @@ export function DisplayStory({
                 Cette fonctionnalité est encours de développement
               </DialogTitle>
               <DialogContent className="max-w-[900px] w-[90%] h-[90%] flex flex-col items-center mr-10">
-              Cette fonctionnalité est encours de développement
+              Cette fonctionnalité est en cours de développement
               </DialogContent>
             </Dialog>
     </div>
