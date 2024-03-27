@@ -1,17 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /** @format */
 
 // DisplayStory.tsx
 
-import { Card, CardContent } from "@/components/ui/card"
 import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel"
 import * as React from "react"
+import { Dialog, DialogTitle, DialogContent } from "../ui/dialog"
 // import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog"
 
 interface Story {
@@ -28,11 +24,9 @@ interface DisplayStoryProps {
 }
 
 export function DisplayStory({
-  stories,
-  selectedStoryIndex,
   onSelectStory,
 }: DisplayStoryProps) {
-  const [api, setApi] = React.useState<CarouselApi>()
+  const [api] = React.useState<CarouselApi>()
   // console.log("stories", stories);
 
   React.useEffect(() => {
@@ -53,7 +47,7 @@ export function DisplayStory({
 
   return (
     <div>
-      <Carousel setApi={setApi} className='w-full max-w-xs' auto={5000}>
+      {/* <Carousel setApi={setApi} className='w-full max-w-xs' auto={5000}>
         <CarouselContent>
           {stories?.map((story, index) => (
             <CarouselItem key={index}>
@@ -72,35 +66,22 @@ export function DisplayStory({
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-      </Carousel>
+      </Carousel> 
       <div className='py-2 text-center text-sm text-muted-foreground'>
         {/* Afficher le contenu de la story sélectionnée */}
-        {stories && stories.length > 0 && (
+        {/* {stories && stories.length > 0 && (
           <p>{stories[selectedStoryIndex].contenu}</p>
         )}
-      </div>
+      </div> */}
 
-      {/* <Dialog>
-              <DialogTrigger className=''>
-                
-              </DialogTrigger>
+      <Dialog>
+              <DialogTitle className=''>
+                Cette fonctionnalité est encours de développement
+              </DialogTitle>
               <DialogContent className="max-w-[900px] w-[90%] h-[90%] flex flex-col items-center mr-10">
-              {stories?.map((story, index) => (
-                <div key={index}>
-                <div>
-                  <div className='flex aspect-square items-center justify-center p-6'>
-                    <img
-                      src={story.mediaUrl}
-                      alt={`story-${index + 1}`}
-                      className='w-full h-full cursor-pointer'
-                      onClick={() => onSelectStory(story.storyId)} // Utilisez le storyId
-                    />
-                  </div>
-                </div>
-                </div>
-                ))}
+              Cette fonctionnalité est encours de développement
               </DialogContent>
-            </Dialog> */}
+            </Dialog>
     </div>
   )
 }

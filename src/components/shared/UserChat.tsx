@@ -1,5 +1,4 @@
 import { Models } from "appwrite";
-import { Link } from "react-router-dom";
 
 type UserChatProps = {
   user: Models.Document;
@@ -7,7 +6,7 @@ type UserChatProps = {
 
 const UserChat = ({ user }: UserChatProps) => {
   return (
-    <Link to={`/profile/${user.$id}`} className="all-chat-user">
+    <div className="all-chat-user">
       <img
         src={user.imageUrl || "/assets/icons/profile-placeholder.svg"}
         alt="creator"
@@ -19,7 +18,7 @@ const UserChat = ({ user }: UserChatProps) => {
           {user.name}
         </p>
       {/* </div> */}
-    </Link>
+    </div>
   );
 };
 

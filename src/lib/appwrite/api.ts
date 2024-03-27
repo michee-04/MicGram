@@ -53,7 +53,7 @@ export async function saveUserToDB(user: {
   name: string
   imageUrl: URL
   username?: string
-}) {
+  }) {
   try {
     const newUser = await databases.createDocument(
       appwriteConfig.databaseId,
