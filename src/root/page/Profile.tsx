@@ -25,7 +25,7 @@ const Profile = () => {
   const { pathname } = useLocation();
 
   const { data: currentUser } = useGetUserById(id || "");
-  console.log(currentUser);
+  // console.log(currentUser);
   
 
   if (!currentUser)

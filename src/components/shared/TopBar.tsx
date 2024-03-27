@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Button } from '@/components/ui/button';
 import { useSignOutAccount } from "@/lib/react-query/queryAndMutations";
 import { useUserContext } from "@/context/AuthContext";
-import { ModeToggle } from "../ui/mode-toggle";
+// import { ModeToggle } from "../ui/mode-toggle";
 
 function TopBar() {
   const { mutate: signOut,  isSuccess } = useSignOutAccount();
@@ -28,7 +28,7 @@ function TopBar() {
               />
             </Link>
 
-            <ModeToggle />
+            {/* <ModeToggle /> */}
 
             <div className="flex gap-4">
               <Button variant="ghost" className="shad-button_ghost" onClick={() => signOut()}>

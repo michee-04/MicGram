@@ -8,7 +8,7 @@ const AllUsers = () => {
   const { toast } = useToast();
 
   const { data: creators, isLoading, isError: isErrorCreators } = useGetUsers();
-  console.log("creators",creators);
+  // console.log("creators",creators);
   
 
   if (isErrorCreators) {

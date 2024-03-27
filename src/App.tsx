@@ -49,7 +49,7 @@ const App = () => {
 
       <Toaster />
     </main>
-    // </ThemeProvider>
+  // </ThemeProvider>
   )
 }
 

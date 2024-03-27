@@ -9,7 +9,7 @@ type PostCardProps = {
 }
 
 function PostCard({ post }: PostCardProps) {
-  console.log("Post in PostCard:", post);
+  // console.log("Post in PostCard:", post);
 
   const { user }= useUserContext();
   
